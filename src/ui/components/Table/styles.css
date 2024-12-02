@@ -1,0 +1,58 @@
+.table-responsive {
+    display   : block;
+    width     : 100%;
+    overflow-x: auto;
+    border    : 1px solid #e3e3e3;
+    padding   : 5px;
+    box-shadow: 0px 0px 8px 2px #e4e4e4;
+}
+.table-custom {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table.table-custom thead th {
+    border        : none;
+    color         : #606182;
+    font-family   : Montserrat;
+    font-size     : 12px;
+    font-weight   : 600;
+    font-stretch  : normal;
+    font-style    : normal;
+    line-height   : normal;
+    letter-spacing: normal;
+    padding       : 10px;
+}
+
+table.table-custom thead tr {
+    border-bottom: 1px solid #afafaf;
+}
+table.table-custom tbody tr {
+    border-bottom: 1px solid rgba(224, 224, 224, 1);
+}
+
+table.table-custom tbody td {
+    color         : var(--secondaryColor);
+    font-family   : Montserrat;
+    font-size     : 12px;
+    padding       : 10px;
+    font-weight   : normal;
+    font-stretch  : normal;
+    font-style    : normal;
+    line-height   : normal;
+    letter-spacing: normal;
+    text-align    : center;
+}
+
+table.table-custom tbody td .rectangle {
+    padding       : 5px 10px 5px 10px;
+    border-radius : 3px;
+    color         : white;
+    text-align    : center;
+    font-size     : 10px;
+    font-weight   : bold;
+    font-stretch  : normal;
+    font-style    : normal;
+    line-height   : normal;
+    letter-spacing: normal;
+}

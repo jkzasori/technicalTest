@@ -1,14 +1,16 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --secondaryColor: #76777d;
+  --primaryColor  : #c20735;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 html,
 body {
@@ -35,6 +37,48 @@ a {
   text-decoration: none;
 }
 
+.avatar {
+  border-radius: 50%;
+  width        : 75px;
+  height       : 75px;
+  box-shadow   : 0px 0px 4px 4px #cfcfcf;
+}
+
+.d-flex {
+  display: flex;
+  gap    : 10px;
+}
+.actionBtn {
+  border         : none;
+  cursor         : pointer;
+  border-radius  : 50%;
+  background     : #dddddd;
+  width          : 40px;
+  height         : 40px;
+  display        : flex;
+  justify-content: center;
+  align-items    : center;
+}
+
+.btn {
+  height       : 30px;
+  padding      : 0 10px;
+  border-radius: 5px;
+  border       : 0;
+  box-shadow   : 1px 1px 5px 2px #dfdfdf;
+  background   : #2196F3;
+  cursor       : pointer;
+}
+
+.btn.delete {
+  background: #c20735;
+}
+
+p {
+  margin: 5px 0;
+    color: gray;
+    text-align: center;
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
