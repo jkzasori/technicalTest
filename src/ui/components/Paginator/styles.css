@@ -7,10 +7,7 @@
     flex-wrap    : wrap;
 }
 
-.pagination-controls {
-    display: flex;
-}
-.pagination-controls button.pageLink {
+button.pageLink {
     color           : #afafaf;
     border          : 1px solid #afafaf;
     position        : relative;
@@ -18,21 +15,24 @@
     padding         : 0.5rem 0.75rem;
     margin-left     : -1px;
     line-height     : 1.25;
-    background-color: #fff;
+    background      : #fff;
+    border          : none;
+    padding         : 5px;
+    cursor          : pointer;
     cursor          : pointer;
 }
 
-.pagination-controls button.pageLink.active {
+button.pageLink.active {
     background: var(--primaryColor);
     color     : white;
 }
 
-.pagination-controls button.pageLink:first-child {
+button.pageLink:first-child {
     border-top-left-radius   : 0.25rem;
     border-bottom-left-radius: 0.25rem;
 }
 
-.pagination-controls button.pageLink:last-child {
+button.pageLink:last-child {
     border-top-right-radius   : 0.25rem;
     border-bottom-right-radius: 0.25rem;
 }

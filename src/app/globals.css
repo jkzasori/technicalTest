@@ -39,8 +39,8 @@ a {
 
 .avatar {
   border-radius: 50%;
-  width        : 75px;
-  height       : 75px;
+  width        : 55px;
+  height       : 55px;
   box-shadow   : 0px 0px 4px 4px #cfcfcf;
 }
 
@@ -53,11 +53,17 @@ a {
   cursor         : pointer;
   border-radius  : 50%;
   background     : #dddddd;
-  width          : 40px;
-  height         : 40px;
+  width          : 30px;
+  height         : 30px;
   display        : flex;
   justify-content: center;
   align-items    : center;
+  transition     : all 0.5s;
+}
+
+.actionBtn:hover {
+  background: #2196f3;
+  box-shadow: 0 0 6px 2px #a4a4a4;
 }
 
 .btn {
@@ -70,6 +76,13 @@ a {
   cursor       : pointer;
 }
 
+.btn.flex {
+  display        : flex;
+  gap            : 10px;
+  justify-content: center;
+  align-items    : center;
+}
+
 .btn.delete {
   background: #c20735;
 }
@@ -78,6 +91,22 @@ p {
   margin: 5px 0;
     color: gray;
     text-align: center;
+}
+.text-center {
+  text-align: center;
+} 
+
+.flex-around {
+  justify-content: space-around;
+}
+
+input {
+  height       : 30px;
+  background   : white;
+  border       : 1px dashed gray;
+  color        : #2196f3;
+  margin-bottom: 10px;
+  padding      : 0 10px;
 }
 @media (prefers-color-scheme: dark) {
   html {

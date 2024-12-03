@@ -15,13 +15,13 @@ import axiosInstance from "../interceptors/axioxInstance";
  * @param useAuth - Indicates whether to use the authenticated axios instance
  * @param config  - Additional configuration options for the request
  */
-export async function getRequest<T>(url: string, config: AxiosRequestConfig = {}): Promise<T> 
+export async function getRequest<T>(url: string, config: AxiosRequestConfig = {}): Promise<{ status: number, data: T | null, error?: any }> 
 {
     const axios: AxiosInstance = axiosInstance;
 
     const response: AxiosResponse<T> = await axios.get(url, config);
 
-    return response.data;
+    return { status: response.status, data: response.data };
 }
 
 /**

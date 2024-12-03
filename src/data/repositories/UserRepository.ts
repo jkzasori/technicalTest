@@ -1,128 +1,145 @@
 import { AxiosError } from "axios";
-
 import { UserRepository } from "@/domain/repositories/UserRepository";
 import { User, UserData, UserList, UserSupport } from "@/domain/entities/User";
 import { deleteRequest, getRequest, postRequest, putRequest } from "../adaper/httpRequests";
 
 /**
- * Implementation of `OrderRepository` that fetches order data
- * 
- * @remarks Uses Axios instances to make HTTP requests to the order server
+ * Implementation of `UserRepository` for managing user-related HTTP requests.
+ *
+ * This class uses Axios-based HTTP request methods (`getRequest`, `postRequest`, `putRequest`, `deleteRequest`) 
+ * to interact with a REST API for retrieving, creating, updating, and deleting user data.
  */
 export class UserRepositoryImpl implements UserRepository {
-    /**
-     * Fetches a paginated list of users from the server
-     *
-     * @throws A promise that resolves to an error if the request fails
-     * 
-     * @param limit  - Number of orders to retrieve
-     * @param offset - Offset for pagination
-     * 
-     * @returns A promise that resolves to an object containing the total count and an array of `Order` objects
-     */
-    async getUsers(page: number): Promise<UserList>
-    {
-        try 
-        {
-            const response = await getRequest<UserList>(`https://reqres.in/api/users?page=${page}`);
-
-            return {
-                page       : response.page,
-                per_page   : response.per_page,
-                total      : response.total,
-                total_pages: response.total_pages,
-                data       : response.data,
-            };
-        } 
-        catch (error) 
-        {
-            let e: AxiosError<unknown, any> = error as AxiosError;
-
-            const apiError: any = JSON.parse(JSON.stringify(e.response?.data || {}));
-
-            return Promise.resolve(apiError);
-        }
-    }
-
-
-    async getUserById(userId: number): Promise<{data: UserData, support: UserSupport}>
-    {
-        try 
-        {
-            const response = await getRequest<{data: UserData, support: UserSupport}>(`/api/users/${userId}`);
-
-            return {
-                data       : response.data,
-                support : response.support,
-            };
-        } 
-        catch (error) 
-        {
-            let e: AxiosError<unknown, any> = error as AxiosError;
-
-            const apiError: any = JSON.parse(JSON.stringify(e.response?.data || {}));
-
-            return Promise.resolve(apiError);
-        }
-    }
-
-    async postNewUser(user: User): Promise<any>
-    {
-        try
-        {
-            const response = await postRequest<any>(
-                `/api/users/`,
-                user,
-            );
-                    
+  /**
+   * Fetches a paginated list of users from the server.
+   *
+   * @param {number} page - The page number to fetch (1-indexed).
+   * @returns {Promise<UserList>} A promise resolving to the paginated list of users.
+   * @throws An error object if the request fails.
+   *
+   * @example
+   * ```typescript
+   * const userList = await userRepository.getUsers(1);
+   * console.log(userList.data); // Array of users
+   * ```
+   */
+  async getUsers(page: number): Promise<any> {
+    try {
+            const response = await getRequest<any>(`/users?page=${page}`);
             return response;
-        }
-        catch (error)
-        {
-            let e: AxiosError<unknown, any> = error as AxiosError;
-    
-            const apiError: any = JSON.parse(JSON.stringify(e.response?.data || {}));
-    
-            return Promise.resolve(apiError);
-        }
+    } catch (error) {
+            const apiError = this.handleApiError(error);
+            return Promise.reject(apiError);
     }
-    
-    async putUser(userId: number, user: User): Promise<any>
-    {
-        try
-        {
-            const response = await putRequest<any>(
-                `/api/users/${userId}`,
-                user,
-            );
-                    
+  }
+
+  /**
+   * Fetches a single user by their unique identifier.
+   *
+   * @param {number} userId - The unique ID of the user to fetch.
+   * @returns {Promise<UserData>} A promise resolving to the user data.
+   * @throws An error object if the request fails.
+   *
+   * @example
+   * ```typescript
+   * const user = await userRepository.getUserById(123);
+   * console.log(user.first_name); // User's first name
+   * ```
+   */
+  async getUserById(userId: number): Promise<any> {
+    try {
+            const response = await getRequest<any>(`/users/${userId}`);
             return response;
-        }
-        catch (error)
-        {
-            let e: AxiosError<unknown, any> = error as AxiosError;
-    
-            const apiError: any = JSON.parse(JSON.stringify(e.response?.data || {}));
-    
-            return Promise.resolve(apiError);
-        }
+    } catch (error) {
+            const apiError = this.handleApiError(error);
+            return Promise.reject(apiError);
     }
-    
-    async deleteUser(userId: number): Promise<any>
-    {
-        try
-        {
-            const response = await deleteRequest<any>(`/api/users/${userId}`);
-                    
+  }
+
+  /**
+   * Creates a new user in the database.
+   *
+   * @param {User} user - The user object containing the new user's data.
+   * @returns {Promise<User>} A promise resolving to the created user's data.
+   * @throws An error object if the request fails.
+   *
+   * @example
+   * ```typescript
+   * const newUser = { name: "Jane Doe", job: "Developer" };
+   * const createdUser = await userRepository.postNewUser(newUser);
+   * console.log(createdUser.name); // "Jane Doe"
+   * ```
+   */
+  async postNewUser(user: User): Promise<any> {
+    try {
+            const response = await postRequest<any>(`/api/users/`, user);
             return response;
-        }
-        catch (error)
-        {
-            let e: AxiosError<unknown, any> = error as AxiosError;
-    
-            const apiError: any = JSON.parse(JSON.stringify(e.response?.data || {}));
-    
-            return Promise.resolve(apiError);
-        }
+    } catch (error) {
+            const apiError = this.handleApiError(error);
+            return Promise.reject(apiError);
     }
+  }
+
+  /**
+   * Updates an existing user's data.
+   *
+   * @param {number} userId - The unique ID of the user to update.
+   * @param {User} user - The updated user object.
+   * @returns {Promise<User>} A promise resolving to the updated user's data.
+   * @throws An error object if the request fails.
+   *
+   * @example
+   * ```typescript
+   * const updatedUser = { name: "John Smith", job: "Manager" };
+   * const result = await userRepository.putUser(123, updatedUser);
+   * console.log(result.job); // "Manager"
+   * ```
+   */
+  async putUser(userId: number, user: User): Promise<any> {
+    try {
+        const response = await putRequest<any>(`/api/users/${userId}`, user);
+        return response;
+    } catch (error) {
+      const apiError = this.handleApiError(error);
+      return Promise.reject(apiError);
+    }
+  }
+
+  /**
+   * Deletes a user by their unique identifier.
+   *
+   * @param {number} userId - The unique ID of the user to delete.
+   * @returns {Promise<void>} A promise resolving when the user is successfully deleted.
+   * @throws An error object if the request fails.
+   *
+   * @example
+   * ```typescript
+   * await userRepository.deleteUser(123);
+   * console.log("User deleted successfully");
+   * ```
+   */
+  async deleteUser(userId: number): Promise<any> {
+    try {
+        const response = await deleteRequest<any>(`/api/users/${userId}`);
+        
+        return response;
+    } catch (error) {
+        const apiError = this.handleApiError(error);
+        
+        return Promise.reject(apiError);
+    }
+  }
+
+  /**
+   * Handles API errors by parsing the Axios error object and returning the relevant data.
+   *
+   * @param {unknown} error - The error object caught during a failed HTTP request.
+   * @returns {any} The parsed error object.
+   *
+   * @private
+   */
+  private handleApiError(error: unknown): any {
+    const axiosError = error as AxiosError;
+    return JSON.parse(JSON.stringify(axiosError.response?.data || {}));
+  }
 }
