@@ -45,7 +45,7 @@ const DetailUserModal: React.FC<DetailUserModalProps> = ({ isOpen, onClose, user
     if (userId) {
       detailUser(userId);
     }
-  }, [userId, detailUser]);
+  }, [userId]);
   
   return (
     <>

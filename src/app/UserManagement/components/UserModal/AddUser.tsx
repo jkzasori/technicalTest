@@ -38,7 +38,7 @@ const AddUserModal: React.FC = () => {
       onChangeUser("name", "");
       onChangeUser("job", "");
     }
-  }, [isOpen, onChangeUser]);
+  }, [isOpen]);
 
   return (
     <>
