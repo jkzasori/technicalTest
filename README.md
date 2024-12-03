@@ -1,4 +1,25 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Project Overview
+
+This project is built using **React**, **TypeScript**, and **Next.js**, following the principles of **MVVM** (Model-View-ViewModel) combined with **Clean Architecture**.
+
+## Key Features
+
+- **MVVM + Clean Architecture**: The application is structured around a clean separation of concerns, promoting testability, scalability, and maintainability. The **viewModels** handle the business logic and state, while the **views** focus solely on rendering the UI.
+  
+- **Folder Structure**:
+  - **viewModels**: Custom hooks that manage the application's business logic and state.
+  - **data**: Contains **adapters**, **interceptors**, and **repositories** that facilitate communication with external services.
+  - **domain**: Includes **entities**, **repositories**, and **useCases** that represent the core of the application’s business logic.
+  - **helpers**: Utility functions and hooks, such as the custom hook `usePortal`.
+
+## Benefits of the Chosen Architecture
+
+1. **Separation of Concerns**: By using MVVM with Clean Architecture, the application logic is clearly separated from the UI, making it easier to maintain and extend.
+2. **Testability**: The structure allows for better unit testing of individual components, use cases, and hooks.
+3. **Scalability**: Clean Architecture supports the growth of the application by keeping components loosely coupled and independent.
+4. **Reusability**: Custom hooks and utility functions are easy to reuse, reducing code duplication across the project.
+
+This structure enhances flexibility and maintainability, while supporting a high-quality development process.
 
 ## Getting Started
 
